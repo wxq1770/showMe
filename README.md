@@ -36,7 +36,39 @@
 
 - [JSON Editor](https://chrome.google.com/webstore/detail/json-editor/lhkmoheomjbkfloacpgllgjcamhihfaj, "JSON Editor")
 
+####图片压缩网址
+
+- [tinypng.com](https://tinypng.com/, "tinypng.com")
+
+- [智图](https://tinypng.com/, "智图")
+
+####图标网站
+
+- [bootcss](http://www.bootcss.com/p/font-awesome/, "bootcss")
+
 
 markdown 语法：
 - [markdown](http://xianbai.me/learn-md/article/syntax/paragraphs-and-line-breaks.html, "markdown")
+
+<br/>
+##webpack打包工具列表
+
+图片自动化压缩插件
+
+```javascript
+//引入插件
+var ImageminPlugin = require('imagemin-webpack-plugin').default;
+
+//配置
+plugins: [
+    new ImageminPlugin({
+      disable: process.env.NODE_ENV !== 'production', // 开发时不启用
+      pngquant: {//图片质量
+        quality: '95-100'
+      }
+    })
+]
+```
+
+- [imagemin-webpack-plugin](https://github.com/Klathmon/imagemin-webpack-plugin, "imagemin-webpack-plugin")
 
