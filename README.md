@@ -28,6 +28,10 @@
 
 - [二维码(QR码)生成器](https://chrome.google.com/webstore/detail/%E4%BA%8C%E7%BB%B4%E7%A0%81qr%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8qr-code-generato/pflgjjogbmmcmfhfcnlohagkablhbpmg, "二维码(QR码)生成器")
 
+- [Smeagol的二维码插件](https://chrome.google.com/webstore/detail/%E4%BA%8C%E7%BB%B4%E7%A0%81qr%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8qr-code-generato/pflgjjogbmmcmfhfcnlohagkablhbpmg, "Smeagol的二维码插件")
+
+- [WEB前端助手(FeHelper)](https://chrome.google.com/webstore/detail/web%E5%89%8D%E7%AB%AF%E5%8A%A9%E6%89%8Bfehelper/pkgccpejnmalmdinmhkkfafefagiiiad?hl=zh-CN, "WEB前端助手(FeHelper)")
+
 - [工具喵 - Unix时间戳、URL编码/解码、IP地址查询、MD5加密、BASE64编码/解码、随机字符串](https://chrome.google.com/webstore/detail/%E5%B7%A5%E5%85%B7%E5%96%B5/coppgeobilocdhiclhgmadabblhfjgpm, "工具喵")
 
 - [JSON Editor](https://chrome.google.com/webstore/detail/json-editor/lhkmoheomjbkfloacpgllgjcamhihfaj, "JSON Editor")
