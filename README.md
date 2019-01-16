@@ -55,7 +55,7 @@
 <br/>
 
 ## webpack打包工具列表
-
+----
 图片自动化压缩插件
 
 - [imagemin-webpack-plugin](https://github.com/Klathmon/imagemin-webpack-plugin, "imagemin-webpack-plugin")
@@ -76,4 +76,26 @@ plugins: [
 ]
 ```
 
+## gulp打包工具
 
+- [gulp-cdn-replace gulp cdn 打包工具](https://github.com/JiangJie/gulp-cdn-replace, "gulp-cdn-replace gulp cdn 打包工具")
+
+
+## 前端日志
+----
+- [badjs-report](https://github.com/BetterJS/badjs-report/blob/master/README.md, "badjs-report")
+
+
+## 路径通配符
+
+```
+匹配package.josn 的name字段文件夹下的src文件夹下的所有以.js后缀名结尾的文件
+src:['<%= pkg.name %>src/**/*.js']  
+
+注意：
+* 匹配任意数量任意字符,但不包括'/'
+？只匹配一个字符,但不包括'/'
+** 匹配任意数量任意字符,且包括'/'
+{ } 匹配枚举文件;示例{main,app}.js,匹配main.js或app.js
+! 不匹配后面的文件
+```
