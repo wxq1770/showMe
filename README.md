@@ -14,6 +14,9 @@
 
 - [Visual Inspector](https://chrome.google.com/webstore/detail/visual-inspector%E5%89%8D%E7%AB%AF%E9%87%8D%E6%9E%84%20%E8%A7%86%E8%A7%89%E8%B5%B0%E6%9F%A5/jgimcbonbekgeahallgcmiibdidjeeim, "Visual Inspector")
 
+- [cssrem css转rem sublime 3插件](https://github.com/flashlizi/cssrem)
+
+
 #### 接口测试工具：
 
 - [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop, "Postman")
@@ -99,6 +102,33 @@ src:['<%= pkg.name %>src/**/*.js']
 { } 匹配枚举文件;示例{main,app}.js,匹配main.js或app.js
 ! 不匹配后面的文件
 ```
+
+## 前端组件
+
+### lodash
+Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。
+Lodash 的模块化方法 非常适用于：
+[lodash](http://lodash.think2011.net/, "lodash")
+
+- 遍历 array、object 和 string
+- 对值进行操作和检测
+- 创建符合功能的函数
+
+### [lodash](http://lodash.think2011.net/, "lodash")
+
+
+### vue-skeleton-webpack-plugin 骨架页面的组件
+
+
+
+
+
+
+
+
+
+
+
 
 ## nuxt.js vue服务器端渲染
 ----
@@ -614,4 +644,253 @@ export default {
   layout: 'blog'
 }
 </script>
+```
+
+<br/>
+<br/>
+
+#### 页面
+页面组件就是vue组件，nuxt.js为这些组件添加了配置项，以便开发通用应用
+
+```javascript
+//Nuxt.js 为页面提供的特殊配置项：如下
+asyncData	//最重要的一个键, 支持 异步数据处理，另外该方法的第一个参数为当前页面组件的 上下文对象。
+fetch	//与 asyncData 方法类似，用于在渲染页面之前获取数据填充应用的状态树（store）。不同的是 fetch 方法不会设置组件的数据。详情请参考 关于fetch方法的文档。
+head	//配置当前页面的 Meta 标签, 详情参考 页面头部配置API。
+layout	//指定当前页面使用的布局（layouts 根目录下的布局文件）。详情请参考 关于 布局 的文档。
+loading	//如果设置为false，则阻止页面自动调用this.$nuxt.$loading.finish()和this.$nuxt.$loading.start(),您可以手动控制它,请看例子,仅适用于在nuxt.config.js中设置loading的情况下。请参考API配置 loading 文档。
+transition	//指定页面切换的过渡动效, 详情请参考 页面过渡动效。
+scrollToTop	//布尔值，默认: false。 用于判定渲染页面前是否需要将当前页面滚动至顶部。这个配置用于 嵌套路由的应用场景。
+validate	//校验方法用于校验 动态路由的参数。
+middleware	//指定页面的中间件，中间件会在页面渲染之前被调用， 请参考 路由中间件。
+```
+
+```html
+<template>
+  <h1 class="red">Hello {{ name }}!</h1>
+</template>
+
+<script>
+export default {
+  asyncData (context) {
+    // 每次在加载组件之前调用
+    return { name: 'World' }
+  },
+  fetch () {
+    // fetch方法用于在呈现页面之前填充存储
+  },
+  head () {
+    // 为这个页面设置元标记
+  },
+  // and more functionality to discover
+  ...
+}
+</script>
+
+<style>
+.red {
+  color: red;
+}
+</style>
+```
+<br/>
+<br/>
+
+#### html头部
+nuxt.js使用了vue-meta更新应用的头部标签和html标签属性
+```JAVA
+//配置vue-meta
+{
+  keyName: 'head', // 设置 meta 信息的组件对象的字段，vue-meta 会根据这 key 值获取 meta 信息
+  attribute: 'n-head', // vue-meta 在监听标签时所添加的属性名
+  ssrAttribute: 'n-head-ssr', // 让 vue-meta 获知 meta 信息已完成服务端渲染的属性名
+  tagIDKeyName: 'hid' // 让 vue-meta 用来决定是否覆盖还是追加 tag 的属性名
+}
+```
+
+
+<br/>
+<br/>
+
+#### 默认 Meta 标签
+在nuxt.config.js中定义所有默认的meta标签。
+
+```javascript
+//一个使用自定义 viewport 和 谷歌字体 的配置示例：
+head: {
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ],
+  link: [
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+  ]
+}
+```
+
+
+<br>
+<br>
+
+#### 个性化特定页面的 Meta 标签
+```
+关于个性化特定页面的 Meta 标签，请参考 页面头部配置API。
+
+注意：为了避免子组件中的meta标签不能正确覆盖父组件中相同的标签而产生重复的现象，建议利用 hid 键为meta标签配一个唯一的标识编号。请阅读关于 vue-meta 的更多信息。
+```
+
+
+<br>
+<br>
+
+### 异步数据
+Nuxt.js 扩展了 Vue.js，增加了一个叫 asyncData 的方法，使得我们可以在设置组件的数据之前能异步获取或处理数据。
+
+#### asyncData 方法
+将在页面组件加载前调用，会在服务端或者路由更新前被调用，第一个参数为上下文对象，利用asyncData方法来获取数据，nuxt.js会将asyncData返回的数据融合组件data方法返回的数据，一并返回给当前组件。
+```java
+asyncData方法是在组件初始化前调用的，所以方法是没办法通过this来获取组件实例对象的
+
+//使用方法
+1.返回一个promise，待promise解析后才会设置组件数据，然后渲染组件
+2.使用async或await
+3.为第二个参数指定回调函数，//该回调函数需符合通用的 NodeJs 回调函数的形式: callback(err, data)
+我们使用 axios 重构 HTTP 请求, 我们 强烈建议您 使用 axios 模块 用于您的Nuxt项目中。
+
+
+
+//栗子Promise
+export default {
+  asyncData ({ params }) {
+    return axios.get(`https://my-api/posts/${params.id}`)
+    .then((res) => {
+      return { title: res.data.title }
+    })
+  }
+}
+
+//使用 async或await
+export default {
+  async asyncData ({ params }) {
+    let { data } = await axios.get(`https://my-api/posts/${params.id}`)
+    return { title: data.title }
+  }
+}
+
+//使用回调函数
+export default {
+  asyncData ({ params }, callback) {
+    axios.get(`https://my-api/posts/${params.id}`)
+    .then((res) => {
+      callback(null, { title: res.data.title }) //该回调函数需符合通用的 NodeJs 回调函数的形式: callback(err, data)
+    })
+  }
+}
+
+//静态默认方式
+export default {
+  data () {
+    return { foo: 'bar' }
+  }
+}
+
+```
+
+```HTML
+//数据的展示
+//asyncData 方法返回的数据在融合 data 方法返回的数据后，一并返回给模板进行展示，如：
+<template>
+  <h1>{{ title }}</h1>
+</template>
+```
+<br>
+<br>
+
+#### 上下文对象
+可通过 API context 来了解该对象的所有属性和方法。
+
+```javascript
+//在服务器端调用asyncData时，您可以访问用户请求的req和res对象。
+export default {
+  async asyncData ({ req, res }) {
+    // 请检查您是否在服务器端
+    // 使用 req 和 res
+    if (process.server) {
+     return { host: req.headers.host }
+    }
+
+    return {}
+  }
+}
+```
+
+#### 访问动态路由数据
+```java
+您可以使用注入 asyncData 属性的 context 对象来访问动态路由数据。例如，可以使用配置它的文件或文件夹的名称访问动态路径参数。所以，如果你定义一个名为 _slug.vue 的文件，您可以通过 context.params.slug 来访问它。
+
+export default {
+  async asyncData ({ params }) {
+    const slug = params.slug // When calling /abc the slug will be "abc"
+    return { slug }
+  }
+}
+```
+
+
+
+#### 监听 query 参数改变
+```
+默认情况下，query的改变不会调用asyncData方法。如果要监听这个行为，例如，在构建分页组件时，您可以设置应通过页面组件的watchQuery属性监听参数。了解更多有关API watchQuery的信息。
+```
+
+
+#### 错误处理
+nuxt.js的上下文对象 context 中提供了一个 error的方法 
+```java
+//Nuxt.js 在上下文对象context中提供了一个 error(params) 方法，你可以通过调用该方法来显示错误信息页面。params.statusCode 可用于指定服务端返回的请求状态码。
+export default {
+  asyncData ({ params, error }) {
+    return axios.get(`https://my-api/posts/${params.id}`)
+    .then((res) => {
+      return { title: res.data.title }
+    })
+    .catch((e) => {
+      error({ statusCode: 404, message: 'Post not found' })
+    })
+  }
+}
+```
+
+有一个值得注意的问题是，如果我们在另外一个页面内也引用了 axios，那么在应用打包发布的时候 axios 会被打包两次，而实际上我们只需要打包一次。这个问题可以通过在 nuxt.config.js 里面配置 build.vendor 来解决：
+
+```JAVA
+//经过如下的配置后，我们可以在任何页面里面引入 axios 而不用担心它会被重复打包。
+module.exports = {
+  build: {
+    vendor: ['axios']
+  }
+}
+```
+
+<br>
+<br>
+<br>
+
+## docker
+----
+
+### docker命令
+- docker build 创建镜像 
+```javascript
+// -t 指定创建镜像后的名字和标签 name:tag 
+// -f 指定要使用的Dockerfile路径；
+// . 当前目录
+docker build -t egg-nuxt/node:v1 -f Dockerfile .
+
+// 将代码直接copy到容器中
+docker cp ~/myproject/. container_name:/home/myname/myproject
+
+//将代码挂在到容器目录下
+docker run -v /mnt/temp/myproject/:/home/myname/myproject ...
+
 ```
