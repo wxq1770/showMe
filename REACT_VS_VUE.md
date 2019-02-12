@@ -52,11 +52,28 @@
 ## awesome-vue-cli3项目手脚架分析
 ### 命令行
 ```javascript
-//打开开发环境
+//打开开发环境 如下是可配置参数
 npm run serve || npm run start || yarn start
 
-//打包
+`--open`    //在服务器启动时打开浏览器
+`--copy`    //在服务器启动时将 URL 复制到剪切版
+`--mode`    //指定环境模式 (默认值：development)
+`--host`    //指定 host (默认值：0.0.0.0)
+`--port`    //指定 port (默认值：8080)
+`--https`   //使用 https (默认值：false)
+
+//打包 如下可配置参数
 npm run build
+
+`--mode`        //指定环境模式 (默认值：production)
+`--dest`        //指定输出目录 (默认值：dist)
+`--modern`      //面向现代浏览器不带自动回退地构建应用,使用现代模式构建应用，为现代浏览器交付原生支持的 ES2015 代码，并生成一个兼容老浏览器的包用来自动回退。
+`--target`      //app | lib | wc | wc-async (默认值：app)
+`--name`        //库或 Web Components 模式下的名字 (默认值：package.json 中的 "name" 字段或入口文件名)
+`--no-clean`    //在构建项目之前不清除目标目录
+`--report`      //生成 report.html 以帮助分析包内容
+`--report-json` //生成 report.json 以帮助分析包内容
+`--watch`       //监听文件变化
 
 //lint 检查代码格式
 npm run lint
@@ -83,6 +100,20 @@ npm run preview
 npm run test:unit
 
 ```
+
+### webapck引用插件分析
+- prerender-spa-plugin 预渲染 通过预编译器将指定路由组件生成静态文件，引用对应组件的样式和js。
+
+    缺点
+    - 不适用与路由太多的页面，会导致构建build的过程，等待的时间是超长
+    - 对于一些经常发生变化的页面，如体育比赛等，会导致编译后的数据不是实时更新的
+    - 不同的用户看都会不同的页面，这种类型的页面不适用预渲染
+
+    注意
+    - 如果没有对应路由或者拼写错误的话，build也会报错
+    - webpack中配置的route需要与router一直，注意/符号
+    - 需要注意Apache等配置，如果访问static的静态文件，都是统一访问到dist/static/目录下的，而不是dist/about/static这种
+
 
 ### 目录结构
 ```javascript
@@ -175,3 +206,4 @@ npm run test:unit
 ├── vue.config.js   //webapck配置，跨域、国际化、pwa
 └── yarn.lock   //安装依赖
 ```
+
